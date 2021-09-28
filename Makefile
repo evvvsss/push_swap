@@ -8,7 +8,8 @@ SRCS		=  	push_swap.c \
 				ft_lstclear.c \
 				sort.c \
 				commands.c \
-				ft_lst_copy.c \
+				operations.c \
+				operations_2.c \
 
 LIBFT		=	libft/
 
