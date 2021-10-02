@@ -10,6 +10,8 @@ SRCS		=  	push_swap.c \
 				commands.c \
 				operations.c \
 				operations_2.c \
+				big_to_a.c \
+				ft_atoi.c 		\
 
 LIBFT		=	libft/
 
@@ -24,6 +26,8 @@ BONUS_OBJS	= 	${BONUS_SRCS:.c=.o}
 CC			= 	gcc -g
 RM			= 	rm -f
 
+ARG			=	`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
+
 CFLAGS		= 	-Wall -Werror -Wextra 
 
 .c.o:
@@ -34,7 +38,6 @@ ${NAME}:		${OBJS}
 				gcc -o $(NAME) $(OBJS) $(LIBFT)/libft.a
 
 ${LIBFT}:		make -C $(LIBFT)
-
 
 all:			$(LIBFT) ${NAME}
 

@@ -16,8 +16,8 @@ void	print(t_info *a, char n)
 	while (a)
 	{
 		printf(" %d ", a->value);
-		// printf("%d ", a->flag);
-		// printf("%d ", a->index);
+		printf("%d ", a->flag);
+		printf("%d ", a->index);
 		a = a->next;
 	}
 	printf("\n");
@@ -26,17 +26,26 @@ void	print(t_info *a, char n)
 int	*add_array( t_info *a, t_elem *el)
 {
 	int	i;
+	int	sort;
 	int	*b;
 
 	i = 0;
+	sort = 0;
 	b = malloc(el->argc * sizeof(int));
+	if (!b)
+		return (NULL);
 	while (a)
 	{
 		b[i] = a->value;
+		if (a->next != NULL && (a->value > a->next->value))
+			sort++;
 		a = a->next;
 		i++;
 	}
-	return (b);
+	if (sort != 0)
+		return (b);
+	else
+		return (NULL);
 }
 
 int	check_args(char *argv, t_info **a, t_elem **el)
@@ -70,14 +79,18 @@ int	check_args(char *argv, t_info **a, t_elem **el)
 		b = ft_split(argv, ' ');
 		while (b[j] != NULL)
 		{
-			ft_lstadd_back(a, ft_lstnew(ft_atoi(b[j])));
+			if ((check_repeats(*a, ft_atoi(b[j], el)) == 1) || (*el)->flag == -5)
+				return (1);
+			ft_lstadd_back(a, ft_lstnew(ft_atoi(b[j], el)));
 			((*el)->argc)++;
 			j++;
 		}
 	}
 	else
 	{
-		ft_lstadd_back(a, ft_lstnew(ft_atoi(argv)));
+		if ((check_repeats(*a, ft_atoi(argv, el)) == 1 ) || (*el)->flag == -5)
+			return (1);
+		ft_lstadd_back(a, ft_lstnew(ft_atoi(argv, el)));
 		(*el)->argc++;
 	}
 	return (0);
@@ -97,7 +110,7 @@ int	main(int argc, char **argv)
 	elem_init_0(&el);
 	while (argc > i)
 	{
-		if (check_args(argv[i], &a, &el) == 1) // проверить на повторения
+		if (check_args(argv[i], &a, &el) == 1)
 		{	
 			write(1, "error\n", 6);
 			return (0);
@@ -105,23 +118,31 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	array = add_array(a, el);
+	if (!array)
+	{
+		printf("Массивчик отсортирован\nВСЕГО ОПЕРАЦИЙ: %d \n", el->counter);
+		return (0);
+	}
 	sort(&array, 0, el->argc - 1);
-	// i = 0;
-	// while (i < el->argc)
-	// 	printf("%d ", array[i++]);
 	print(a, 'a');
 	print(b, 'b');
 	elem_init_1(&el, array);
 	printf("%d Argc \n", el->argc);
 	small_to_b(&a, &b, &el, el->argc);
 	el->max = el->middle;
-	elem_init_2(&el, b, array);
+	//el->flag++;
+	find_mid(&el, b, array);
+	printf("%d min_next in \n", el->min_next_i);
 	while (b)
-	{	
-		big_to_a(&b, &a, &el, array);
-		elem_init_2(&el, b, array);
+	{
+		if ((el->argc / 2 ) < el->min_i)
+			big_to_a(&b, &a, &el, array);
+		else
+			big_to_a_back(&b, &a, &el, array);
+		//el->min_i = el->min_next_i;
+		find_mid(&el, b, array);
 	}
-	big_to_a(&b, &a, &el, array);
+	el->flag++;
 	el->max = a->value;
 	el->min = a->value;
 	el->argc = 0;
@@ -132,6 +153,12 @@ int	main(int argc, char **argv)
 		print(a, 'a');
 		print(b, 'b');
 	}
+	printf("%d min_next \n", el->min_next);
+	printf("%d max \n", el->max);
+	printf("%d mid \n", el->middle);
+	printf("%d min \n", el->min);
+	printf("%d min i \n", el->min_i);
+	printf("%d min next i \n",el->min_next_i);
 	print(a, 'a');
 	print(b, 'b');
 	printf("ВСЕГО ОПЕРАЦИЙ: %d \n", el->counter);
