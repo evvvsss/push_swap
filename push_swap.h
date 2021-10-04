@@ -16,10 +16,8 @@ typedef struct s_elem
 {
 	int			middle;
 	int			min;
-	int			min_next;
 	int			max;
 	int			min_i;
-	int			min_next_i;
 	int			flag;
 	int			argc;
 	int			counter;
@@ -27,7 +25,7 @@ typedef struct s_elem
 
 void		print(t_info *a, char n); //delete
 t_info		*ft_lstnew(int value);
-void		find_min_next(int min_next, t_info *a, t_elem **el);
+void		find_index(int min, t_info *a, t_elem **el);
 long long	ft_atoi(const char *str, t_elem	**el);
 int			*add_array( t_info *a, t_elem *el);
 int			check_args(char *argv, t_info **a, t_elem **el);
