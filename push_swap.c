@@ -78,7 +78,7 @@ int	check_args(char *argv, t_info **a, t_elem **el)
 		b = ft_split(argv, ' ');
 		while (b[j] != NULL)
 		{
-			if (check_repeats(*a, ft_atoi(b[j], el)) == 1)
+			if (check_repeats(*a, ft_atoi(b[j], el)) == 1 || (*el)->counter == -5)
 				return (1);
 			ft_lstadd_back(a, ft_lstnew(ft_atoi(b[j], el)));
 			((*el)->argc)++;
@@ -87,7 +87,7 @@ int	check_args(char *argv, t_info **a, t_elem **el)
 	}
 	else
 	{
-		if (check_repeats(*a, ft_atoi(argv, el)) == 1)
+		if (check_repeats(*a, ft_atoi(argv, el)) == 1 || (*el)->counter == -5)
 			return (1);
 		ft_lstadd_back(a, ft_lstnew(ft_atoi(argv, el)));
 		(*el)->argc++;
@@ -106,12 +106,12 @@ int	main(int argc, char **argv)
 	i = 1;
 	a = NULL;
 	b = NULL;
-	elem_init_0(&el);
+	elem_init_0(&el, argc);
 	while (argc > i)
 	{
 		if (check_args(argv[i], &a, &el) == 1)
 		{	
-			write(1, "error\n", 6);
+			write(1, "Error\n", 6);
 			return (0);
 		}
 		i++;
@@ -119,7 +119,7 @@ int	main(int argc, char **argv)
 	array = add_array(a, el);
 	if (!array)
 	{
-		printf("Массивчик отсортирован\nВСЕГО ОПЕРАЦИЙ: %d \n", el->counter);
+		printf("Массив отсортирован\nВСЕГО ОПЕРАЦИЙ: %d \n", el->counter);
 		return (0);
 	}
 	// print(a, 'a');

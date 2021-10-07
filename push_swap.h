@@ -3,6 +3,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include "libft/libft.h"
+# include <limits.h>
+# define MAX 21474836417
 
 typedef struct s_info
 {
@@ -13,19 +15,14 @@ typedef struct s_info
 
 typedef struct s_elem
 {
-	int			middle;
-	int			min;
-	int			max;
-	int			min_i;
-	int			flag;
 	int			argc;
+	int			add;
 	int			counter;
 }				t_elem;
 
-
 t_info		*ft_lstnew(int value);
 t_info		*ft_lstlast(t_info *lst);
-long long	ft_atoi(const char *str, t_elem	**el);
+int			ft_atoi(const char *str, t_elem	**el);
 int			find_index(int val, t_info *a, t_elem *el);
 int			check_repeats(t_info *a, int digit);
 int			*add_array( t_info *a, t_elem *el);
@@ -34,7 +31,7 @@ void		ft_lstadd_back(t_info **lst, t_info *new);
 void		ft_lstadd_front(t_info **lst, t_info *new);
 void		ft_lstclear(t_info **lst);
 void		sort_array(int **array, int start, int end);
-void		elem_init_0(t_elem **el);
+void		elem_init_0(t_elem **el, int argc);
 void		print(t_info *a, char n);
 void		pa_pb(t_info **first, t_info **second, char name, t_elem **el);
 void		rrr(t_info **a, t_info **b, t_elem **el);

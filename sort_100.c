@@ -13,7 +13,7 @@ void	sort_a(t_info **a, t_info **b, t_elem **el)
 			ra_rb(b, 'b', el);
 			i++;
 		}
-		else if ((*a)->index <= i + 15)
+		else if ((*a)->index <= i + (*el)->add)
 		{
 			pa_pb(b, a, 'b', el);
 			i++;

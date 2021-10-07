@@ -1,4 +1,7 @@
-#include "push_swap.h"
+#include <stdlib.h>
+#include <stdio.h>
+# define MAX 922337203685477580
+
 
 static size_t	check(const char *str)
 {	
@@ -26,45 +29,53 @@ static int	ft_sign(const char *str, size_t *i, int *sign)
 	return (1);
 }
 
-static long long	ft_digit(const char *str, size_t *i, int *sign)
+static int	ft_digit(const char *str, size_t *i, int *sign)
 {
-	size_t		k;
-	long long	c;
+	size_t	k;
+	size_t	c;
 
 	k = 0;
 	c = 0;
-	while (str[*i] >= 48 && str[*i] <= 57 && str[*i] != '\0')
-	{	
+	while (str[*i] >= 48 && str[*i] <= 57 && str[*i] !='\0')
+	{
+		if (k++ > 17 && ((str[*i] - 48 > 7 && c == MAX) || c > MAX))
+		{
+			if (*sign == -1)
+				return (-10);
+			else
+				return (-1);
+		}
 		c = c * 10 + str[*i] - 48;
-		if ((c - 1 > INT_MAX && *sign == -1) || (c > INT_MAX && (*sign != -1)))
-			return (-10);
 		(*i)++;
 	}
 	return (c);
 }
 
-int	ft_atoi(const char *str, t_elem	**el)
+long long	ft_atoi(const char *str)
 {
-	size_t			i;
-	long long		f;
-	int				sign;
+	size_t		i;
+	int			f;
+	int			sign;
 
 	sign = 0;
 	i = check(str);
 	if (ft_sign(str, &i, &sign) == 0)
-		return (0);
+		return (0); // не тот символ
 	f = ft_digit(str, &i, &sign);
 	if (f < 0)
-		(*el)->counter = -5;
-	if (f == -1)
-		return (-1);
-	else if (f == -10)
-		return (0);
+		return (-1); // границы инт
+	// else if (f == -10)
+	// 	return (0);
 	else
 	{
 		if (sign == -1)
-			return ((int)f * sign);
+			return (-f);
 		else
-			return ((int)f);
+			return (f);
 	}
+}
+
+int main()
+{
+	printf(" %lld ", ft_atoi("214748365599999999"));
 }
