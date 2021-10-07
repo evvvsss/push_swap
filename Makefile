@@ -1,17 +1,18 @@
 NAME		= 	push_swap
 
-SRCS		=  	push_swap.c \
-				ft_lstnew.c \
-				ft_lstadd_back.c \
-				ft_lstlast.c \
-				ft_lstadd_front.c \
-				ft_lstclear.c \
-				sort.c \
-				commands.c \
-				operations.c \
-				operations_2.c \
-				big_to_a.c \
-				ft_atoi.c 		\
+SRCS		=  	push_swap.c			\
+				ft_lstnew.c			\
+				ft_lstadd_back.c	\
+				ft_lstlast.c		\
+				ft_lstadd_front.c	\
+				ft_lstclear.c		\
+				sort_array.c		\
+				commands.c			\
+				operations.c		\
+				operations_2.c		\
+				ft_atoi.c 			\
+				ft_lstsize.c		\
+				sort_100.c 			\
 
 LIBFT		=	libft/
 
@@ -25,8 +26,6 @@ BONUS_OBJS	= 	${BONUS_SRCS:.c=.o}
 
 CC			= 	gcc -g
 RM			= 	rm -f
-
-ARG			=	`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
 
 CFLAGS		= 	-Wall -Werror -Wextra 
 

@@ -16,7 +16,6 @@ void	print(t_info *a, char n)
 	while (a)
 	{
 		printf(" %d ", a->value);
-		printf("%d ", a->flag);
 		printf("%d ", a->index);
 		a = a->next;
 	}
@@ -123,33 +122,18 @@ int	main(int argc, char **argv)
 		printf("Массивчик отсортирован\nВСЕГО ОПЕРАЦИЙ: %d \n", el->counter);
 		return (0);
 	}
-	print(a, 'a');
-	sort(&array, 0, el->argc - 1);
-	elem_init_1(&el, array);
-	small_to_b(&a, &b, &el, el->argc);
-	el->max = el->middle;
-	el->flag++;
-	find_mid(&el, b, array);
-	while (b)
-	{
-		if ((el->argc / 2 ) < el->min_i)
-			big_to_a(&b, &a, &el, array);
-		 else
-		 	big_to_a_back(&b, &a, &el, array);
-		//find_mid(&el, b, array);
-	}
-	el->flag++;
-	el->max = a->value;
-	el->min = a->value;
-	el->argc = 0;
-	while (a->index < 0)
-		move_to_b(&a, &b, &el, array);
-	// printf("%d max \n", el->max);
-	// printf("%d mid \n", el->middle);
-	// printf("%d min \n", el->min);
-	// printf("%d min i \n", el->min_i);
+	// print(a, 'a');
+	sort_array(&array, 0, el->argc - 1);
+	index_to_lists(array, &a);
+	// print(a, 'a');
+	// while (sorting_check(a, array) == 1)
+	// {	
+		sort_a(&a, &b, &el);
+		// printf("ARGC  %d \n", el->argc);
+		sort_b(&a, &b, &el, 0);
+	// }
 	print(a, 'a');
 	print(b, 'b');
-	printf("ВСЕГО ОПЕРАЦИЙ: %d \n", el->counter);
+	 printf("ВСЕГО ОПЕРАЦИЙ: %d \n", el->counter);
 	return (0);
 }

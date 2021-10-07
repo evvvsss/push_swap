@@ -50,34 +50,6 @@ void	find_mid(t_elem **el, t_info *a, int *array)
 	//(*el)->flag++; // ГДЕТО ФЛАГ МЕНЯЕТСЯ ЧАСТО И ОНИ ДАЛЕКО
 }
 
-void	small_to_b(t_info **a, t_info **b, t_elem **el, int argc)
-{
-	int	i;
-
-	i = 0;
-	// printf("%d ToBmax \n", (*el)->max);
-	//  printf("%d toBmid \n", (*el)->middle);
-	//  printf("%d ToBmin \n", (*el)->min);
-	(*el)->argc = 0;
-	while ((*a) && i <= argc)
-	{	
-		// if ((*a)->value == (*el)->min)
-		// 	(*el)->min_i = (*el)->argc + 1;
-		if ((*a)->value < (*el)->middle)
-		{
-			// (*a)->index++;
-			pa_pb(b, a, 'b', el);
-			(*el)->argc++;
-		}
-		else
-			ra_rb(a, 'a', el);
-		i++;
-	}
-	// printf("%d min_INDEX \n", (*el)->min_i);
-	// print(*a, 'a');
-	// print(*b, 'b');
-}
-
 void	next_elem(int *array, t_elem **el, t_info **a)
 {
 	int	i;
@@ -87,38 +59,7 @@ void	next_elem(int *array, t_elem **el, t_info **a)
 		i++;
 	(*el)->min = array[++i];
 	(*a)->index = i;
-	find_index((*el)->min, *a, el);
-}
-
-void	move_to_b(t_info **a, t_info **b, t_elem **el, int *array)
-{
-	int	i;
-
-	i = 0;
-	while (((*a)->flag == (*a)->next->flag) && ((*a)->next != NULL))
-	{
-		pa_pb(b, a, 'b', el);
-		(*el)->argc++;
-		if ((*b)->value >= (*el)->max)
-			(*el)->max = (*b)->value;
-		if ((*b)->value <= (*el)->min)
-			(*el)->min = (*b)->value;
-	}
-	pa_pb(b, a, 'b', el);
-	(*el)->argc++;
-	if ((*b)->value >= (*el)->max)
-		(*el)->max = (*b)->value;
-	if ((*b)->value <= (*el)->min)
-		(*el)->min = (*b)->value;
-	find_index((*el)->min, *b, el);
-	find_mid(el, *b, array);
-	while (*b)
-	{
-		if (((*el)->argc / 2 ) < (*el)->min_i)
-			big_to_a(b, a, el, array);
-		 else
-		 	big_to_a_back(b, a, el, array);
-	}
+	//find_index((*el)->min, *a, el);
 }
 
 void	elem_init_0(t_elem **el)
@@ -144,23 +85,67 @@ int		check_repeats(t_info *a, int digit)
 	return (0);
 }
 
-void	find_index(int min, t_info *a, t_elem **el)
+int	find_index(int val, t_info *a, t_elem *el)
 {
 	int	i;
-	int	flag;
 
-	i = 0;
-	flag = 0;
-	while (a && i < (*el)->argc)
+	i = 1;
+	while (a && i < el->argc)
 	{
-		if (a->value == min)
-		{	
-			(*el)->min_i = (*el)->argc - i;
-			flag++;
-		}
+		if (a->value == val)
+			return (i);
 		a = a->next;
 		i++;
 	}
-	if (flag == 0)
-		(*el)->min_i = -1;
+	return (0);
+}
+
+int	find_elem(int index, t_info *a)
+{
+	int	i;
+
+	i = 1;
+	while (a)
+	{
+		if (a->index == index)
+			return (i);
+		a = a->next;
+		i++;
+	}
+	return (0);
+}
+
+void index_to_lists(int *array, t_info **a)
+{
+	int		i;
+	t_info	*tmp;
+
+	i = 0;
+	tmp = *a;
+	while (tmp)
+	{
+		while (tmp->value != array[i])
+			i++;
+		tmp->index = i;
+		tmp = tmp->next;
+		i = 0;
+	}
+}
+
+int max_index(t_info *a)
+{
+	int	max;
+
+	max = 0;
+	if (a)
+	{
+		max = a->index;
+		while (a)
+		{
+			if (max < a->index)
+				max = a->index;
+			a = a->next;
+		}
+	}
+	return (max);
 }

@@ -9,7 +9,6 @@ t_info	*ft_lstnew(int value)
 		return (0);
 	list->value = value;
 	list->index = -1;
-	list->flag = 0;
 	list->next = NULL;
 	return (list);
 }
