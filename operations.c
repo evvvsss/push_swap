@@ -22,7 +22,7 @@ void	pa_pb(t_info **first, t_info **second, char name, t_elem **el)
 		write(1, "pa\n", 3);
 	else if (name == 'b')
 		write(1, "pb\n", 3);
-	(*el)->counter++;
+	(*el)->cnt++;
 }
 
 void	rrr(t_info **a, t_info **b, t_elem **el)
@@ -30,7 +30,7 @@ void	rrr(t_info **a, t_info **b, t_elem **el)
 	rra_rrb(a, 'a', el);
 	rra_rrb(b, 'b', el);
 	write(1, "rrr\n", 4);
-	(*el)->counter++;
+	(*el)->cnt++;
 }
 
 void	rra_rrb(t_info **a, char name, t_elem **el)
@@ -48,7 +48,7 @@ void	rra_rrb(t_info **a, char name, t_elem **el)
 		write(1, "rra\n", 4);
 	else if (name == 'b')
 		write(1, "rrb\n", 4);
-	(*el)->counter++;
+	(*el)->cnt++;
 }
 
 void	ra_rb(t_info **a, char name, t_elem **el)
@@ -64,7 +64,7 @@ void	ra_rb(t_info **a, char name, t_elem **el)
 		write(1, "ra\n", 3);
 	else if (name == 'b')
 		write(1, "rb\n", 3);
-	(*el)->counter++;
+	(*el)->cnt++;
 }
 
 void	rr(t_info **a, t_info **b, t_elem **el)
@@ -72,5 +72,5 @@ void	rr(t_info **a, t_info **b, t_elem **el)
 	ra_rb(a, 'a', el);
 	ra_rb(b, 'b', el);
 	write(1, "rr\n", 3);
-	(*el)->counter++;
+	(*el)->cnt++;
 }

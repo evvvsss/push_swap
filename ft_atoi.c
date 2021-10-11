@@ -55,7 +55,7 @@ int	ft_atoi(const char *str, t_elem	**el)
 		return (0);
 	f = ft_digit(str, &i, &sign);
 	if (f < 0)
-		(*el)->counter = -5;
+		(*el)->cnt = -5;
 	if (f == -1)
 		return (-1);
 	else if (f == -10)

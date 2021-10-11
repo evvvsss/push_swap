@@ -10,9 +10,13 @@ SRCS		=  	push_swap.c			\
 				commands.c			\
 				operations.c		\
 				operations_2.c		\
-				ft_atoi.c 			\
+				ft_atoi.c			\
 				ft_lstsize.c		\
-				sort_100.c 			\
+				sort_100.c			\
+				sort_2345.c			\
+				print_stack.c		\
+				check_args.c		\
+				main_part.c			\
 
 LIBFT		=	libft/
 

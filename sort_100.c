@@ -30,14 +30,15 @@ void	sort_b(t_info **a, t_info **b, t_elem **el, int max)
 	while (*b)
 	{
 		max = max_index(*b);
-		if ((*b)->index != max && (find_elem(max_index(*b), *b) <= (ft_lstsize(*b) / 2)))
+		if ((*b)->index != max && (find_elem(max, *b) <= (ft_lstsize(*b) / 2)))
 		{
 			while ((*b)->index != max)
 				ra_rb(b, 'b', el);
 			pa_pb(a, b, 'a', el);
 			(*el)->argc--;
 		}
-		else if ((*b)->index != max && (find_elem(max_index(*b), *b) > (ft_lstsize(*b) / 2)))
+		else if ((*b)->index != max
+			&& (find_elem(max, *b) > (ft_lstsize(*b) / 2)))
 		{
 			while ((*b)->index != max)
 				rra_rrb(b, 'b', el);
