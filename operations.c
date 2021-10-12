@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bferny <bferny@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 21:27:56 by bferny            #+#    #+#             */
+/*   Updated: 2021/10/12 21:27:57 by bferny           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	pa_pb(t_info **first, t_info **second, char name, t_elem **el)
@@ -27,8 +39,8 @@ void	pa_pb(t_info **first, t_info **second, char name, t_elem **el)
 
 void	rrr(t_info **a, t_info **b, t_elem **el)
 {
-	rra_rrb(a, 'a', el);
-	rra_rrb(b, 'b', el);
+	rra_rrb(a, 'c', el);
+	rra_rrb(b, 'c', el);
 	write(1, "rrr\n", 4);
 	(*el)->cnt++;
 }
@@ -69,8 +81,8 @@ void	ra_rb(t_info **a, char name, t_elem **el)
 
 void	rr(t_info **a, t_info **b, t_elem **el)
 {
-	ra_rb(a, 'a', el);
-	ra_rb(b, 'b', el);
+	ra_rb(a, 'c', el);
+	ra_rb(b, 'c', el);
 	write(1, "rr\n", 3);
 	(*el)->cnt++;
 }
