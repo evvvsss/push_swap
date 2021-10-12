@@ -3,6 +3,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include "libft/libft.h"
+# include "get_next_line/get_next_line.h"
 # include <limits.h>
 # define MAX 21474836417
 
@@ -55,5 +56,14 @@ int			check_string(char *argv, int space);
 int			str_with_spaces(char *argv, t_info **a, t_elem **el);
 void		main_part(int **array, t_info **a, t_info **b, t_elem **el);
 void		ft_clear(t_info **a, t_elem **el);
+int	exec_rra_rrb(char	*str, t_info **a, t_info **b, t_elem **el);
+int	exec_rrr(char	*str, t_info **a, t_info **b, t_elem **el);
+int	exec_rr(char	*str, t_info **a, t_info **b, t_elem **el);
+int	exec_ra_rb(char	*str, t_info **a, t_info **b, t_elem **el);
+int	read_cmd(char	*str, t_info **a, t_info **b, t_elem **el);
+int	exec_pa_pb(char	*str, t_info **a, t_info **b, t_elem **el);
+int	exec_ss(char	*str, t_info **a, t_info **b, t_elem **el);
+int	exec_sa_sb(char	*str, t_info **a, t_info **b, t_elem **el);
+int check_stacks( t_info *a, t_info *b);
 
 #endif

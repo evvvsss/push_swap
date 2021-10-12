@@ -65,3 +65,39 @@ int	check_args(char *argv, t_info **a, t_elem **el)
 	}
 	return (0);
 }
+
+int	*add_array(t_info *a, t_elem *el)
+{
+	int	i;
+	int	sort;
+	int	*b;
+
+	i = 0;
+	sort = 0;
+	b = malloc(el->argc * sizeof(int));
+	if (!b)
+		return (NULL);
+	while (a)
+	{
+		b[i] = a->value;
+		if (a->next != NULL && (a->value > a->next->value))
+			sort++;
+		a = a->next;
+		i++;
+	}
+	if (sort != 0)
+		return (b);
+	else
+	{
+		ft_clear(&a, &el);
+		return (NULL);
+	}
+}
+
+void	ft_clear(t_info **a, t_elem **el)
+{
+	ft_lstclear(a);
+	a = NULL;
+	free(*el);
+	(*el) = NULL;
+}

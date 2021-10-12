@@ -2,49 +2,14 @@
 #include "libft/libft.h"
 #include <stdio.h>
 
-int	*add_array(t_info *a, t_elem *el)
-{
-	int	i;
-	int	sort;
-	int	*b;
-
-	i = 0;
-	sort = 0;
-	b = malloc(el->argc * sizeof(int));
-	if (!b)
-		return (NULL);
-	while (a)
-	{
-		b[i] = a->value;
-		if (a->next != NULL && (a->value > a->next->value))
-			sort++;
-		a = a->next;
-		i++;
-	}
-	if (sort != 0)
-		return (b);
-	else
-	{
-		ft_clear(&a, &el);
-		return (NULL);
-	}
-}
-
-void	ft_clear(t_info **a, t_elem **el)
-{
-	ft_lstclear(a);
-	a = NULL;
-	free(*el);
-	(*el) = NULL;
-}
-
 int	main(int argc, char **argv)
 {
 	t_info	*a;
 	t_info	*b;
 	t_elem	*el;
 	int		i;
-	int		*array;
+	char	*buf;
+	//int		*array;
 
 	i = 1;
 	if (argc < 2)
@@ -60,9 +25,15 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	array = add_array(a, el);
-	if (!array)
-		return (0);
-	main_part(&array, &a, &b, &el);
+	while (get_next_line(1, &buf) > 0)
+	{
+		if(read_cmd(buf, &a, &b, &el) == -1)
+			return (0); // 
+	}
+	check_stacks(a, b);
+	//array = add_array(a, el);
+	// if (!array)
+	// 	return (0);
+	//main_part(&array, &a, &b, &el);
 	return (0);
 }

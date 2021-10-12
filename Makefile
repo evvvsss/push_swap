@@ -20,7 +20,10 @@ SRCS		=  	push_swap.c			\
 
 LIBFT		=	libft/
 
-#BONUS_SRCS	= 	ft_split.c 		\
+BONUS_SRCS	= 	bonus_commands.c 	\
+				bonus_oper.c		\
+				push_swap_bonus.c 	\
+				
 
 INCLUDES	=	./
 
